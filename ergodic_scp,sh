@@ -1,0 +1,8 @@
+#! /bin/bash
+
+cd  /data/20210811
+
+for file  in  `ls $1`  
+    do  
+       scp $file 10.188.19.10:/data/20210811/$file       
+    done
