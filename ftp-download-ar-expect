@@ -1,0 +1,12 @@
+#!/bin/bash
+
+expect <<EOF
+    set timeout 5
+    spawn  ftp  10.188.8.48
+    expect "Name (10.188.8.48:root):" { send "admin\n" }
+    expect "Password:" { send "admin\n" }
+    expect "ftp>" {send "pwd\n"}
+    expect "ftp>" {send "ls\n"}
+    expect "ftp>" {send "exit\n"} 
+    expect  eof
+EO
