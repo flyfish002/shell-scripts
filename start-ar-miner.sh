@@ -1,17 +1,35 @@
 #!/bash/sh
 
-NAME='arweave-miner-linux-v1.0.7.5'
-#NAME='x-proxy-linux-amd64'
-ProcessIDs=`ps -ef | grep "$NAME"  | grep -v "grep" | awk '{print $2}'`
-#echo $ProcessIDs
+AR_MINER='arweave-miner-linux-v1.0.7.5'
+AR_PROXY='x-proxy-linux-amd64'
 
-if [ !$ProcessIDs ];then
-  for id in  $ProcessIDs
+ProxyIDs=`ps -ef | grep "$AR_PROXY"  | grep -v "grep" | awk '{print $2}'`
+if [ !$ProxyIDs ];then
+  for id1 in  $ProxyIDs
      do 
-        kill -9 $id        
-        echo "killed  $id"
+        kill -9 $id1        
+        echo "killed proxy miner   $id1"
      done
 fi
 
 cd   /data
-nohup   ./arweave-miner-linux-v1.0.7.5 >>  ar-miner-output.log &
+nohup   ./$AR_PROXY >> proxy-ar-output.log &
+
+
+
+
+MinerIDs=`ps -ef | grep "$AR_MINER"  | grep -v "grep" | awk '{print $2}'`
+if [ !$MinerIDs ];then
+  for id2 in  $MinerIDs
+     do 
+        kill -9 $id2        
+        echo "killed  miner  $id2"
+     done
+fi
+
+cd   /data
+nohup   ./$AR_MINER >>  ar-miner-output.log &
+
+
+
+exit  0
