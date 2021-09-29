@@ -1,0 +1,13 @@
+#!/bin/bash
+
+for host in `cat /data/servers.txt`
+do
+expect <<EOF
+    set timeout 2
+    spawn echo "exec host*****" $host"****"
+    spawn ssh $host
+    expect "Are you sure you want to continue connecting" { send "yes\n" }
+    expect "~#" {send "exit\n"}
+    expect  eof
+EOF
+done
