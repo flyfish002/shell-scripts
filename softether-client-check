@@ -1,0 +1,29 @@
+#!  /bin/bash
+
+log="/tmp/softether-client.log"
+vpn_nic_name="vpn_cz-eth-1"
+cur_time=`date`
+ip_prefix="192.168"
+
+#check  vpn nic is exsit
+nic_content=`ip  addr |  grep $vpn_nic_name`
+#echo  $nic_content
+if [ -z "$nic_content" ];then
+   echo "$cur_time : vpn nic is not exist, please start softether client......."  >> $log
+   sh  /opt/softether/add-softether-nic.sh
+   sh  /opt/softether/add-softether-account.sh
+   sh  /opt/softether/start-softether-client.sh
+
+else
+   #echo "$cur_time : vpn nic is  exist"
+   ip_content=`ip  addr |  grep $vpn_nic_name | grep  $ip_prefix`
+   if [ -z "$ip_content" ];then
+   echo "$cur_time : vpn client can not get ip,please restart softether client......."  >> $log
+   sh  /opt/softether/add-softether-nic.sh
+   sh  /opt/softether/add-softether-account.sh
+   sh  /opt/softether/start-softether-client.sh
+
+   else
+   echo "$cur_time : softether client is work well!!!"     >> $log
+   fi
+fi
