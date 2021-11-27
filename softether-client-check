@@ -1,5 +1,8 @@
 #!  /bin/bash
 
+source /etc/profile
+source ~/.bash_profile
+
 log="/tmp/softether-client.log"
 vpn_nic_name="vpn_cz-eth-1"
 cur_time=`date`
