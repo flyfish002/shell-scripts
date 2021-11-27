@@ -1,5 +1,8 @@
 #!  /bin/bash
 
+source /etc/profile
+source ~/.bash_profile
+
 account_name="cz-vpn-1"
 vpn_name="cz-vpn-1"
 vpn_nic_name="cz-eth-1"
