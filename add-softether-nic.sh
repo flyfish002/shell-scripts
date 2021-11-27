@@ -1,5 +1,7 @@
 #!  /bin/bash
 
+source /etc/profile
+source ~/.bash_profile
 
 client_path="/root/vpnclient/"
 vpn_name="cz-eth-1"
