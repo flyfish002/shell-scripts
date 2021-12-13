@@ -19,7 +19,7 @@ ip_alert_content_1=" get vpn server ip failed,please check!!!!"
 ip_alert_content_2=" ping is unreachable,please check!!!"
 ip_success_content_1=" cur host get ssl vpn  server dhcp ip is ok"
 ip_success_content_2=" ping is ok."
-slack_webhook_token="https://hooks.slack.com/services/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"
+slack_webhook_token="https://hooks.slack.com/services/T02G0B5LDH9/B02QSMRFL2D/XXXXXXXXXXXXXXXXXXX"
 
 
 source /etc/profile
