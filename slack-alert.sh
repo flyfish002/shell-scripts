@@ -21,7 +21,7 @@ ip_success_content_1=" cur host get ssl vpn  server dhcp ip is ok"
 ip_success_content_2=" ping is ok."
 alter_log_file="/tmp/slack_alter.log"
 #slack_webhook_token="https://hooks.slack.com/services/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"
-slack_webhook_token="https://hooks.slack.com/services/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"
+slack_webhook_token="https://hooks.slack.com/services/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"
 
 
 source /etc/profile
@@ -85,7 +85,7 @@ CheckIpStatus(){
 #check changzhou local  vpn server underlay ip send ping
   pingreceivecount3=`ping -c $ping_count $cz_proxy_ip -w $ping_timeout_second  | grep loss | cut -d \, -f 2 | awk '{print $1}'`
   if [ "$pingreceivecount3" = "0" ];then
-     alterContent4="$ip_alert_content_prefix  $cz_proxy_ip  \n  alert: to cz-server  $cz_proxy_ip  $ip_alert_content_2 \n time: `date`"
+     alterContent4="$ip_alert_content_prefix  $hostlocalip \n  alert: to cz-server  $cz_proxy_ip  $ip_alert_content_2 \n time: `date`"
      echo $alterContent4  >> $alter_log_file
      SendSlackMessage  $alterContent4
   else
@@ -93,3 +93,6 @@ CheckIpStatus(){
   fi
 
 }
+
+
+CheckIpStatus
