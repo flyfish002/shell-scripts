@@ -20,10 +20,13 @@ ip_alert_content_2=" ping is unreachable,please check!!!"
 ip_success_content_1=" cur host get ssl vpn  server dhcp ip is ok"
 ip_success_content_2=" ping is ok."
 slack_webhook_token="https://hooks.slack.com/services/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"
+alter_log_file="/tmp/slack_alter.log"
 
 
 source /etc/profile
 source ~/.bash_profile
+
+
 
 
 
@@ -50,10 +53,10 @@ CheckIpStatus(){
   if [ -z "$hostvpnip" ];then
      #echo "cur host can not get vpn ip from vpn server....."
      altercontent1="$ip_alert_content_prefix  $hostlocalip  \n  alert: to $cz_proxy_ip $ip_alert_content_1  \n time: `date`"
-     echo  $altercontent1
+     echo  $altercontent1  > $alter_log_file
      SendSlackMessage   $altercontent1
   else 
-     echo  "`date`: $ip_success_content_1"
+     echo  "`date`: $ip_success_content_1"  > $alter_log_file
   fi
     
 #check shanghai vpn sh_hub_1 gateway  send some ping      
@@ -62,30 +65,30 @@ CheckIpStatus(){
   if [ "$pingreceivecount1" = "0" ];then
      #echo "$sh_hub_1_gw_ip no reply, please send alert"  
      alterContent2="$ip_alert_content_prefix  $hostlocalip  \n  alert: to $sh_hub_1_gw_ip  $ip_alert_content_2 \n time: `date`"            
-     echo   $alterContent2     
-     SendSlackMessage  $alterContent2
+     echo   $alterContent2     > $alter_log_file
+     SendSlackMessage  $alterContent2   
   else
-     echo "`date`: $hostlocalip to $sh_hub_1_gw_ip $ip_success_content_2" 
+     echo "`date`: $hostlocalip to $sh_hub_1_gw_ip $ip_success_content_2" > $alter_log_file
   fi
 
 #check changzhou local  vpn server gateway ip send ping
   pingreceivecount2=`ping -c $ping_count $cz_hub_gw_ip -w $ping_timeout_second  | grep loss | cut -d \, -f 2 | awk '{print $1}'`  
   if [ "$pingreceivecount2" = "0" ];then  
      alterContent3="$ip_alert_content_prefix  $hostlocalip  \n  alert: to $cz_hub_gw_ip  $ip_alert_content_2 \n time: `date`" 
-     echo $alterContent3
+     echo $alterContent3   > $alter_log_file
      SendSlackMessage  $alterContent3
   else
-     echo "`date`: $hostlocalip to $cz_hub_gw_ip $ip_success_content_2"
+     echo "`date`: $hostlocalip to $cz_hub_gw_ip $ip_success_content_2"  > $alter_log_file
   fi
 
 #check changzhou local  vpn server underlay ip send ping
   pingreceivecount3=`ping -c $ping_count $cz_proxy_ip -w $ping_timeout_second  | grep loss | cut -d \, -f 2 | awk '{print $1}'`
   if [ "$pingreceivecount3" = "0" ];then
      alterContent4="$ip_alert_content_prefix  $hostlocalip  \n  alert: to $cz_proxy_ip  $ip_alert_content_2 \n time: `date`"
-     echo $alterContent4
+     echo $alterContent4  > $alter_log_file
      SendSlackMessage  $alterContent3
   else
-     echo "`date`: $hostlocalip to $cz_proxy_ip  $ip_success_content_2"
+     echo "`date`: $hostlocalip to $cz_proxy_ip  $ip_success_content_2" > $alter_log_file
   fi
 
 }
