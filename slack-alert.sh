@@ -19,7 +19,7 @@ ip_alert_content_1=" get vpn server ip failed,please check!!!!"
 ip_alert_content_2=" ping is unreachable,please check!!!"
 ip_success_content_1=" cur host get ssl vpn  server dhcp ip is ok"
 ip_success_content_2=" ping is ok."
-slack_webhook_token="https://hooks.slack.com/services/T02G0B5LDH9/B02QSMRFL2D/XXXXXXXXXXXXXXXXXXX"
+slack_webhook_token="https://hooks.slack.com/services/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"
 
 
 source /etc/profile
@@ -53,7 +53,7 @@ CheckIpStatus(){
      echo  $altercontent1
      SendSlackMessage   $altercontent1
   else 
-     echo $ip_success_content_1
+     echo  "`date`: $ip_success_content_1"
   fi
     
 #check shanghai vpn sh_hub_1 gateway  send some ping      
@@ -65,7 +65,7 @@ CheckIpStatus(){
      echo   $alterContent2     
      SendSlackMessage  $alterContent2
   else
-     echo "$hostlocalip to $sh_hub_1_gw_ip $ip_success_content_2" 
+     echo "`date`: $hostlocalip to $sh_hub_1_gw_ip $ip_success_content_2" 
   fi
 
 #check changzhou local  vpn server gateway ip send ping
@@ -75,7 +75,7 @@ CheckIpStatus(){
      echo $alterContent3
      SendSlackMessage  $alterContent3
   else
-     echo "$hostlocalip to $cz_hub_gw_ip $ip_success_content_2"
+     echo "`date`: $hostlocalip to $cz_hub_gw_ip $ip_success_content_2"
   fi
 
 #check changzhou local  vpn server underlay ip send ping
@@ -85,7 +85,7 @@ CheckIpStatus(){
      echo $alterContent4
      SendSlackMessage  $alterContent3
   else
-     echo "$hostlocalip to $cz_proxy_ip  $ip_success_content_2"
+     echo "`date`: $hostlocalip to $cz_proxy_ip  $ip_success_content_2"
   fi
 
 }
