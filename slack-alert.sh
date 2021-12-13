@@ -65,30 +65,30 @@ CheckIpStatus(){
   if [ "$pingreceivecount1" = "0" ];then
      #echo "$sh_hub_1_gw_ip no reply, please send alert"  
      alterContent2="$ip_alert_content_prefix  $hostlocalip  \n  alert: to $sh_hub_1_gw_ip  $ip_alert_content_2 \n time: `date`"            
-     echo   $alterContent2     > $alter_log_file
+     echo   $alterContent2    >> $alter_log_file
      SendSlackMessage  $alterContent2   
   else
-     echo "`date`: $hostlocalip to $sh_hub_1_gw_ip $ip_success_content_2" > $alter_log_file
+     echo "`date`: $hostlocalip to $sh_hub_1_gw_ip $ip_success_content_2" >> $alter_log_file
   fi
 
 #check changzhou local  vpn server gateway ip send ping
   pingreceivecount2=`ping -c $ping_count $cz_hub_gw_ip -w $ping_timeout_second  | grep loss | cut -d \, -f 2 | awk '{print $1}'`  
   if [ "$pingreceivecount2" = "0" ];then  
      alterContent3="$ip_alert_content_prefix  $hostlocalip  \n  alert: to $cz_hub_gw_ip  $ip_alert_content_2 \n time: `date`" 
-     echo $alterContent3   > $alter_log_file
+     echo $alterContent3  >> $alter_log_file
      SendSlackMessage  $alterContent3
   else
-     echo "`date`: $hostlocalip to $cz_hub_gw_ip $ip_success_content_2"  > $alter_log_file
+     echo "`date`: $hostlocalip to $cz_hub_gw_ip $ip_success_content_2"  >> $alter_log_file
   fi
 
 #check changzhou local  vpn server underlay ip send ping
   pingreceivecount3=`ping -c $ping_count $cz_proxy_ip -w $ping_timeout_second  | grep loss | cut -d \, -f 2 | awk '{print $1}'`
   if [ "$pingreceivecount3" = "0" ];then
      alterContent4="$ip_alert_content_prefix  $hostlocalip  \n  alert: to $cz_proxy_ip  $ip_alert_content_2 \n time: `date`"
-     echo $alterContent4  > $alter_log_file
+     echo $alterContent4  >> $alter_log_file
      SendSlackMessage  $alterContent3
   else
-     echo "`date`: $hostlocalip to $cz_proxy_ip  $ip_success_content_2" > $alter_log_file
+     echo "`date`: $hostlocalip to $cz_proxy_ip  $ip_success_content_2" >> $alter_log_file
   fi
 
 }
