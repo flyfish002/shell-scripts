@@ -21,7 +21,7 @@ ip_success_content_1=" cur host get ssl vpn  server dhcp ip is ok"
 ip_success_content_2=" ping is ok."
 alter_log_file="/tmp/slack_alter.log"
 
-slack_webhook_token="https://hooks.slack.com/services/T02G0B5LDH9/B02QSMRFL2D/XXXXXXXXXXXXXXXXXXXXXXX"
+slack_webhook_token="https://hooks.slack.com/services/xxxxxxxxxxxxx/xxxxxxxxxxx/XXXXXXXXXXXXXXXXXXXXXXX"
 
 
 source /etc/profile
