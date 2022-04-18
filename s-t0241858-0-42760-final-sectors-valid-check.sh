@@ -43,7 +43,8 @@ do
        #echo 当前选中的扇区id为:   $cur_sector_id
        if [ $cur_sector_id -ge  $start_sector_id  -a $cur_sector_id -le  $end_sector_id   ];then
           echo "当前需要迁移的扇区id为: $cur_sector_id "
-          mv  $sector_sealed_dir/$line   $sector_mv_sealed_dir/$line 
+          mv  $sector_sealed_dir/$line   $sector_mv_sealed_dir/$line
+          mkdir -p $sector_mv_cache_dir/$line
           mv  $sector_cache_dir/$line/*  $sector_mv_cache_dir/$line/         
 
           invalid_count=$(($invalid_count+1))
