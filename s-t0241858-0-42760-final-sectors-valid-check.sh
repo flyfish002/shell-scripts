@@ -24,7 +24,7 @@ sector_mv_sealed_dir="/data/invalid_sealed"
 sector_cache_dir="/data/cache"
 sector_mv_cache_dir="/data/invalid_cache"
 
-
+#删除之前的日志记录
 #clean exist log file
 rm -rf  $check_log
 
