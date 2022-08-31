@@ -1,6 +1,5 @@
 
 #! /bin/bash
-
 for CPU in  /sys/devices/system/cpu/cpu[0-9]*; do
     CPUID=`basename $CPU | cut -b4-`
     echo -en "CPU:  $CPUID\t"
